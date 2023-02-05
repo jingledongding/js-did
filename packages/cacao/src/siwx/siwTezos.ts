@@ -1,6 +1,6 @@
 import { SignatureType, SiwxMessage } from './siwx.js'
-import * as uint8arrays from 'uint8arrays'
-
+// import * as uint8arrays from 'uint8arrays'
+import {toString, fromString} from 'uint8arrays';
 export class SiwTezosMessage extends SiwxMessage {
   toMessage(): string {
     return super.toMessage('Tezos')
@@ -29,6 +29,6 @@ function encodePayload(message: string): string {
   const stringPrefix = '01'
   const len = ('0000000' + message.length.toString(16)).slice(-8)
 
-  const text = uint8arrays.toString(uint8arrays.fromString(message, 'utf-8'), 'hex')
+  const text = toString(fromString(message, 'utf-8'), 'hex')
   return michelinePrefix + stringPrefix + len + text
 }
